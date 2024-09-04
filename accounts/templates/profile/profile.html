@@ -1,0 +1,58 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+	{{userdata.first_name}} {{userdata.last_name}} | Profile
+{% endblock %}
+{% block content %}
+	
+	<div class="user_profile">
+		<div class="profile_card">
+			<div class="card">
+				<img src="{{userdata.profile.profile_image.url}}" width="200">
+				<h2>{{userdata.first_name}} {{userdata.last_name}}</h2>
+				<small>@{{userdata.username}}</small>
+			</div>
+
+			<div class="btns">
+				{% if user.is_staff %}
+					<a href="{% url 'admin_profile_edit' userdata.username %}">Update User </a>
+				{% elif userdata.username == user.username %}
+					<a href="{% url 'edit_profile' userdata.username %}">Edit Profile </a>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="profile_details">
+			<div class="info_boxes">
+				<div class="card_box">
+					Joined Date: <span>{{userdata.profile.date_of_joining}}</span>  
+				</div>
+				<div class="card_box">
+					Last Working Date: <span>{{userdata.profile.date_of_leaving}}</span>  
+				</div>
+				<div class="card_box">
+					Stipend: <span>Rs. 5000 </span>
+				</div>
+			</div>	
+
+			<div class="other_details">
+				<ul>
+					<li><b>Full Name: </b><span>{{userdata.first_name}} {{userdata.last_name}}</span></li>
+					<li><b>Email: </b><span>{{userdata.email}}</span></li>
+					<li><b>Phone Number:</b> <span>{{userdata.profile.phone}} </span></li>
+					<li><b>Document: </b><span><button>View</button></span></li>
+					<li>
+						<b>Account Status: </b>
+						<span>
+							{% if userdata.is_active %}
+								Active
+							{% else %}
+								Expired
+							{% endif %}
+						</span>  
+					</li>
+					<li><b>Admin Remarks: </b><span>{{userdata.profile.admin_remark}}<span></li>
+				</ul>
+			</div>		
+		</div>
+	</div>
+{% endblock %}

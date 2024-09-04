@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html' %}
+{%block title%}
+	Login 
+{% endblock%}
+{%block content%}
+	<div class="auth_content">
+		<h1>Login To Your Account</h1>
+		<form method="POST" class="register_form">
+			{%csrf_token%}
+			<p>
+				<label>Username</label>
+				{{form.username}}
+			</p>
+			<p>
+				<label>Password</label>
+				{{form.password}}
+			</p>
+			<button>Login</button>
+		</form>
+	</div>
+{% endblock %}

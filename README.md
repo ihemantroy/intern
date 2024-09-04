@@ -1,1 +1,1 @@
-# intern
+# intern-manager
